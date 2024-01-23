@@ -1,0 +1,13 @@
+.add-button {
+  color: white;
+  background-color: #0b69ff;
+  padding: 10px;
+  border-width: 0;
+  border-radius: 5px;
+}
+
+.bg {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
