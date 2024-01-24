@@ -26,4 +26,33 @@
   background-color: #0ea5e9;
 }
 
-/* Write your CSS here */
+.button {
+  border-width: 0;
+  background-color: transparent;
+}
+.delete-btn {
+  border-width: 0;
+  background-color: transparent;
+}
+.dta {
+  display: flex;
+}
+.posted-time {
+  color: #475569;
+  font-family: 'Roboto';
+  font-size: 12px;
+  margin-left: 20px;
+  padding: 10px;
+}
+.name {
+  font-size: 18px;
+  font-weight: bold;
+}
+.list-comments {
+  list-style-type: none;
+}
+.onEvents {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

@@ -11,3 +11,13 @@
   flex-direction: row;
   justify-content: space-between;
 }
+.comments-length {
+  background-color: #0b69ff;
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin: 5px;
+  border-radius: 3px;
+}

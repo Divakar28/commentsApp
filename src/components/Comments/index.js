@@ -2,6 +2,8 @@ import {Component} from 'react'
 
 import {v4 as uuidv4} from 'uuid'
 
+import CommentItem from '../CommentItem'
+
 import './index.css'
 
 const initialContainerBackgroundClassNames = [
@@ -25,6 +27,35 @@ class Home extends Component {
     this.setState({commentInput: event.target.value})
   }
 
+  onLikesButton = id => {
+    this.setState(prevState => ({
+      commentList: prevState.commentList.map(each => {
+        if (id === each.id) {
+          return {...each, isLiked: !each.isLiked}
+        }
+        return each
+      }),
+    }))
+  }
+
+  onDeleteComment = id => {
+    const {commentList} = this.state
+    this.setState({commentList: commentList.filter(each => each.id !== id)})
+  }
+
+  renderCommentList = () => {
+    const {commentList} = this.state
+
+    return commentList.map(each => (
+      <CommentItem
+        key={each.id}
+        commentDetails={each}
+        onLikesButton={this.onLikesButton}
+        onDeleteComment={this.onDeleteComment}
+      />
+    ))
+  }
+
   AddComment = event => {
     event.preventDefault()
     const {userInput, commentInput} = this.state
@@ -39,6 +70,8 @@ class Home extends Component {
 
     this.setState(prevState => ({
       commentList: [...prevState.commentList, newComment],
+      userInput: '',
+      commentInput: '',
     }))
   }
 
@@ -46,6 +79,7 @@ class Home extends Component {
     const {userInput, commentInput, commentList} = this.state
     console.log(userInput)
     console.log(commentInput)
+    console.log(commentList)
 
     return (
       <div>
@@ -54,15 +88,21 @@ class Home extends Component {
         <form onSubmit={this.AddComment}>
           <div className="bg">
             <div>
-              <input placeholder="Your Name" onChange={this.onChangeName} />
+              <input
+                type="text"
+                placeholder="Your Name"
+                onChange={this.onChangeName}
+                value={userInput}
+              />
               <br />
               <textarea
                 rows="6"
                 placeholder="Your Comment"
                 onChange={this.onChangeComment}
+                value={commentInput}
               />
               <br />
-              <button type="button" className="add-button">
+              <button type="submit" className="add-button">
                 Add Comment
               </button>
             </div>
@@ -75,8 +115,10 @@ class Home extends Component {
           </div>
         </form>
         <hr />
-        <p>comments</p>
-        <ul>{commentList}</ul>
+        <p>
+          <span className="comments-length">{commentList.length}</span>comments
+        </p>
+        <ul>{this.renderCommentList()}</ul>
       </div>
     )
   }
